@@ -13,12 +13,16 @@ talks <-
 
 talks.yaml <- lapply(talks,yaml::yaml.load)
 
+
 yaml_paste_talks <- function(y) {
   out <- paste0(y$title,'. ',
                 '*',y$event,'.* ',
                 y$location,'. ',
                 y$year,'.')
-  if (!is.null(y$link)) out <- paste0(out,' *[Download](',y$link,')*. ')
+  if (!is.null(y$link)) {
+    dl_link <- paste0('https://talks.colebrokamp.com/', y$s3_filename)
+    out <- paste0(out,' *[Download](',dl_link,')*. ')
+    }
   return(out)
 }
 
